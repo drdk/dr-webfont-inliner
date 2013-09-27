@@ -7,9 +7,6 @@
     "type": "git",
     "url": "https://github.com/drdk/dr-inline-webfont.git"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "rafl@dr.dk",
   "license": "BSD",
   "dependencies": {
