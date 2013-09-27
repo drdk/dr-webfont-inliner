@@ -1,5 +1,5 @@
 {
-  "name": "inlineWebfont",
+  "name": "dr-inline-webfont",
   "version": "0.0.0",
   "description": "Inlines webfonts in CSS",
   "main": "index.js",
