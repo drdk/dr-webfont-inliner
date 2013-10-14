@@ -1,5 +1,5 @@
-dr-inline-webfont
-=================
+dr-webfont-inliner
+==================
 
 Inline webfonts in stylesheets.
 
