@@ -16,8 +16,8 @@ if (require.main === module) {
 
 function inline (input, output) {
 	input = input.replace(/\\/g, "/");
-	var root = input.replace(/\/[^\/]+$/, "/"),
-		output = output || input.replace(/(\.[^.]+)$/, "-inline$1"),
+	output = output || input.replace(/(\.[^.]+)$/, "-inline$1");
+	var root = input.replace(/(^|\/)[^\/]+$/, "$1"),
 		css = fs.readFileSync(input, {encoding: "utf8"});
 	css = css.replace(/(url\(["']?)([^"']+.(woff|ttf|eot|svg))(?:\??#[^"']+)?(["']?\))/g, function (m, cssPrefix, url, type, cssSuffix) {
 		url = path.resolve(root, url);
