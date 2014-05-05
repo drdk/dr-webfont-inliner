@@ -9,7 +9,7 @@ Inline webfonts in stylesheets.
 ### Command:
 
 ```
-phantomjs index.js <file> [options]
+node index.js <file> [options]
 ```
 
 #### Options:
@@ -20,12 +20,12 @@ phantomjs index.js <file> [options]
 
 Output stylesheet with inlined fonts at the same location as the source:
 ```
-phantomjs index.js style.css
+node index.js style.css
 ```
 
 Output stylesheet with inlined fonts in another location:
 ```
-phantomjs index.js my/path/style.css -o my/other/path/style.css
+node index.js my/path/style.css -o my/other/path/style.css
 ```
 
 ### Module:
