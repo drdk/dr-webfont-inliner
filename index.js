@@ -19,10 +19,11 @@ function inline (input, output) {
 	output = output || input.replace(/(\.[^.]+)$/, "-inline$1");
 	var root = input.replace(/(^|\/)[^\/]+$/, "$1"),
 		css = fs.readFileSync(input, {encoding: "utf8"});
-	css = css.replace(/(url\(["']?)([^"']+.(woff|ttf|eot|svg))(?:\??#[^"']+)?(["']?\))/g, function (m, cssPrefix, url, type, cssSuffix) {
+	css = css.replace(/(url\(["']?)([^"']+.(woff[2]?|ttf|eot|svg))(?:\??#[^"']+)?(["']?\))/g, function (m, cssPrefix, url, type, cssSuffix) {
 		url = path.resolve(root, url);
 		var data = fs.readFileSync(url),
 			mime = {
+				woff2: "application/x-font-woff2",
 				woff: "application/x-font-woff",
 				ttf: "application/x-font-ttf",
 				eot: "application/x-font-eot",

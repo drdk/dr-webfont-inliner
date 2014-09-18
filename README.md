@@ -52,3 +52,13 @@ var inline = require("dr-webfont-inliner");
 
 inline("my/path/style.css", "my/other/path/style.css")
 ```
+
+---
+
+## Changelog
+
+### 0.3.0
+
+Features:
+
+* woff2 added.
