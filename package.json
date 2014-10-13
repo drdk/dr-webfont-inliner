@@ -1,8 +1,8 @@
 {
   "name": "dr-webfont-inliner",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Inlines webfonts in CSS",
-  "main": "index.js",
+  "main": "./index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/drdk/dr-webfont-inliner.git"
@@ -10,6 +10,10 @@
   "author": "rafl@dr.dk",
   "license": "BSD",
   "dependencies": {
+    "async": "^0.9.0",
     "optimist": "~0.6.0"
+  },
+  "bin": {
+    "webfont-inliner": "./index.js"
   }
 }

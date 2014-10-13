@@ -9,7 +9,7 @@ Inline webfonts in stylesheets.
 ### Command:
 
 ```
-node index.js <file> [options]
+webfont-inliner <file> [options]
 ```
 
 #### Options:
@@ -20,12 +20,12 @@ node index.js <file> [options]
 
 Output stylesheet with inlined fonts at the same location as the source:
 ```
-node index.js style.css
+webfont-inliner style.css
 ```
 
 Output stylesheet with inlined fonts in another location:
 ```
-node index.js my/path/style.css -o my/other/path/style.css
+webfont-inliner my/path/style.css -o my/other/path/style.css
 ```
 
 ### Module:
@@ -33,7 +33,8 @@ node index.js my/path/style.css -o my/other/path/style.css
 #### Arguments
 
 * `input` - Path to the stylesheet that needs to get webfonts inlined.
-* `output` - Optional. Path to write output to. Defaults to appending `-inline` to input name.
+* `output` - Optional. Path to write output to. Defaults to appending `-inline` to input name (unless `callback` is defined).
+* `callback` - Optional. A callback to receive inlined css.
 
 ##### Examples:
 
@@ -42,7 +43,9 @@ Output stylesheet with inlined fonts at the same location as the source:
 ```javascript
 var inline = require("dr-webfont-inliner");
 
-inline("style.css");
+inline("style.css", function (css) {
+	console.log("inlined css:", css);
+});
 ```
 
 Output stylesheet with inlined fonts in another location:
@@ -56,6 +59,16 @@ inline("my/path/style.css", "my/other/path/style.css")
 ---
 
 ## Changelog
+
+### 0.4.0
+
+Changes:
+
+* Now fully async.
+
+Features:
+
+* Added `callback` argument.
 
 ### 0.3.0
 
