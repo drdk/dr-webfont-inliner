@@ -35,29 +35,37 @@ function inline (input, output, callback) {
 		}
 
 		var hash = {};
-		
-		css.match(/(url\(["']?)([^"']+.(woff[2]?|ttf|eot|svg))(?:\??#[^"']+)?(["']?\))/g).forEach(function (url) {
+		var id = 0;
+
+		css = css.replace(/(url\(["']?)([^"']+.(woff[2]?|ttf|eot|svg))(?:\??#[^"']+)?(["']?\))/g, function (url) {
 			url = url.replace(/(^url\(["']?)|(["']?\)$)/g, "");
-			hash[url] = function (callback) {
+			var token = "<!-- " + (id++) + " -->";
+			hash[token] = function (callback) {
 				url = path.resolve(root, url);
-				fs.readFile(url, callback);
-			}
+				fs.readFile(url, function (err, data) {
+					callback(null, {
+						type: path.extname(url),
+						data: data
+					});
+				});
+			}; 
+			return token;
 		});
 
-		async.parallel(hash, function (err, result) {
-			var url, content, type;
+		async.parallel(hash, function (err, results) {
+			var token, result, content, type;
 			var mimes = {
-				".woff2": "application/x-font-woff2",
-				".woff": "application/x-font-woff",
-				".ttf": "application/x-font-ttf",
-				".eot": "application/x-font-eot",
+				".woff2": "font/woff2",
+				".woff": "font/woff",
+				".ttf": "font/ttf",
+				".eot": "font/eot",
 				".svg": "image/svg+xml"
 			};
 
-			for (url in result) {
-				type = path.extname(url);
-				content = "data:" + mimes[type] + ";base64," + result[url].toString('base64');
-				css = css.replace(url, content);
+			for (token in results) {
+				result = results[token];
+				content = "data:" + mimes[result.type] + ";base64," + result.data.toString('base64');
+				css = css.replace(token, "url(" + content + ")");
 			}
 
 			if (typeof callback === "function") {
